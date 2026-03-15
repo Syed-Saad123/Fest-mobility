@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fest Mobility — Launch Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #F7F5F0;
+  --paper:   #FFFFFF;
+  --ink:     #0E1420;
+  --navy:    #0A1628;
+  --gold:    #C8962A;
+  --gold2:   #E8B84B;
+  --teal:    #007B8A;
+  --teal2:   #00A8B8;
+  --green:   #1A6B3C;
+  --green2:  #22A857;
+  --red:     #B03020;
+  --amber:   #C87818;
+  --muted:   #6B7A8D;
+  --border:  #DDD8CE;
+  --phase1a: #C8962A;
+  --phase1b: #007B8A;
+  --phase2:  #1A6B3C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.page { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; }
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  padding: 40px 48px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 32px;
+}
+
+.brand { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--gold); margin-bottom: 10px; }
+.main-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: white; line-height: 1.1; }
+.main-title span { color: var(--gold2); }
+.sub { font-size: 13px; color: #8AAAC8; margin-top: 8px; line-height: 1.5; max-width: 480px; }
+
+.kpi-strip { display: flex; flex-direction: column; gap: 4px; }
+.kpi { background: rgba(255,255,255,0.06); border: 1px solid rgba(200,150,42,0.25); padding: 12px 18px; min-width: 180px; }
+.kpi-val { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--gold2); }
+.kpi-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; color: #5A7090; text-transform: uppercase; margin-top: 2px; }
+
+/* ── PHASE TABS ── */
+.phase-nav { display: flex; gap: 0; margin-bottom: 32px; border: 1px solid var(--border); overflow: hidden; }
+.phase-tab {
+  flex: 1; padding: 14px 20px; cursor: pointer; border: none; background: white;
+  font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  border-right: 1px solid var(--border); transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 3px; text-align: left;
+}
+.phase-tab:last-child { border-right: none; }
+.phase-tab .tab-label { font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
+.phase-tab.p1a { color: var(--phase1a); border-top: 4px solid var(--phase1a); }
+.phase-tab.p1b { color: var(--phase1b); border-top: 4px solid var(--phase1b); }
+.phase-tab.p2  { color: var(--phase2);  border-top: 4px solid var(--phase2); }
+.phase-tab.p1a:hover, .phase-tab.p1a.active { background: #FDF8EE; }
+.phase-tab.p1b:hover, .phase-tab.p1b.active { background: #EEF7F8; }
+.phase-tab.p2:hover,  .phase-tab.p2.active  { background: #EEF7F2; }
+
+/* ── PHASE CONTENT ── */
+.phase-content { display: none; }
+.phase-content.active { display: block; }
+
+/* ── STEP CARDS ── */
+.steps { display: flex; flex-direction: column; gap: 20px; }
+
+.step-card {
+  background: white; border: 1px solid var(--border);
+  display: grid; grid-template-columns: 72px 1fr;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.step-num-col {
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding: 20px 0; border-right: 1px solid var(--border);
+}
+
+.step-num {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; line-height: 1;
+}
+.step-tag { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; text-align: center; margin-top: 4px; }
+
+.p1a .step-num, .p1a .step-tag { color: var(--phase1a); }
+.p1b .step-num, .p1b .step-tag { color: var(--phase1b); }
+.p2  .step-num, .p2  .step-tag { color: var(--phase2); }
+
+.step-body { padding: 20px 24px; }
+
+.step-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.step-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+
+.step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.step-grid.single { grid-template-columns: 1fr; }
+.step-grid.three  { grid-template-columns: 1fr 1fr 1fr; }
+
+/* Info blocks */
+.info-block { background: #F7F5F0; border: 1px solid var(--border); padding: 12px 14px; }
+.info-block.gold  { border-left: 3px solid var(--gold);   background: #FDF8EE; }
+.info-block.teal  { border-left: 3px solid var(--teal);   background: #EEF7F8; }
+.info-block.green { border-left: 3px solid var(--green);  background: #EEF7F2; }
+.info-block.red   { border-left: 3px solid var(--red);    background: #FDF0EE; }
+.info-block.amber { border-left: 3px solid var(--amber);  background: #FDF6EE; }
+.info-block.navy  { border-left: 3px solid var(--navy);   background: #EEF2F8; }
+
+.block-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+.info-block.gold  .block-label { color: var(--gold); }
+.info-block.teal  .block-label { color: var(--teal); }
+.info-block.green .block-label { color: var(--green); }
+.info-block.red   .block-label { color: var(--red); }
+.info-block.amber .block-label { color: var(--amber); }
+.info-block.navy  .block-label { color: var(--navy); }
+
+.block-content { font-size: 12px; color: var(--ink); line-height: 1.55; }
+.block-content strong { font-weight: 600; }
+.block-content a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(0,123,138,0.3); }
+.block-content a:hover { border-bottom-color: var(--teal); }
+
+/* Cost badge */
+.cost-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--navy); color: white;
+  padding: 5px 12px; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500; margin-top: 10px;
+}
+.cost-badge.green { background: var(--green); }
+.cost-badge.teal  { background: var(--teal); }
+.cost-badge.amber { background: var(--amber); }
+.cost-badge.red   { background: var(--red); }
+
+/* Timeline strip */
+.timeline-strip {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 10px; overflow: hidden; border: 1px solid var(--border);
+}
+.tl-cell {
+  flex: 1; text-align: center; padding: 8px 4px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  border-right: 1px solid var(--border); color: var(--muted);
+}
+.tl-cell:last-child { border-right: none; }
+.tl-cell.active-p1a { background: var(--phase1a); color: white; font-weight: 500; }
+.tl-cell.active-p1b { background: var(--phase1b); color: white; font-weight: 500; }
+.tl-cell.active-p2  { background: var(--phase2);  color: white; font-weight: 500; }
+
+/* Data table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.data-table th { background: var(--navy); color: white; padding: 8px 10px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+.data-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #F7F5F0; }
+.data-table tr:hover td { background: #FDF8EE; }
+.td-gold   { color: var(--gold);   font-weight: 600; }
+.td-green  { color: var(--green);  font-weight: 600; }
+.td-teal   { color: var(--teal);   font-weight: 600; }
+.td-red    { color: var(--red);    font-weight: 600; }
+.td-amber  { color: var(--amber);  font-weight: 600; }
+.td-mono   { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.td-bold   { font-weight: 600; }
+
+/* Alert box */
+.alert { display: flex; gap: 12px; padding: 12px 14px; margin-top: 12px; border: 1px solid; }
+.alert.warn  { background: #FDF0EE; border-color: var(--red);   }
+.alert.note  { background: #FDF8EE; border-color: var(--amber); }
+.alert.tip   { background: #EEF7F8; border-color: var(--teal);  }
+.alert.ok    { background: #EEF7F2; border-color: var(--green); }
+.alert-icon  { font-size: 16px; flex-shrink: 0; }
+.alert-text  { font-size: 12px; line-height: 1.55; }
+.alert-text strong { font-weight: 600; }
+.alert-text a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(0,123,138,0.3); }
+
+/* Checklist */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.checklist li { display: flex; gap: 8px; font-size: 12px; line-height: 1.5; }
+.checklist li::before { content: '→'; font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+.checklist li a { color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(0,123,138,0.3); }
+
+/* Divider */
+.phase-divider {
+  text-align: center; padding: 20px 0; margin: 8px 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  color: var(--muted); position: relative;
+}
+.phase-divider::before {
+  content: ''; position: absolute; top: 50%; left: 0; right: 0;
+  height: 1px; background: var(--border); z-index: 0;
+}
+.phase-divider span { background: var(--bg); padding: 0 14px; position: relative; z-index: 1; }
+
+/* Summary footer */
+.summary-bar {
+  background: var(--navy); color: white; padding: 28px 32px;
+  margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.sum-block h4 { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--gold2); text-transform: uppercase; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(200,150,42,0.25); }
+.sum-block ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.sum-block li { font-size: 12px; color: #8AAAC8; line-height: 1.5; }
+.sum-block li::before { content: '· '; color: var(--gold2); }
+.sum-block li strong { color: white; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .header { grid-template-columns: 1fr; }
+  .step-grid, .step-grid.three { grid-template-columns: 1fr; }
+  .phase-nav { flex-direction: column; }
+  .summary-bar { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="brand">Fest Mobility · Launch Roadmap · March 2026</div>
+      <div class="main-title">From Zero to <span>Subscription Platform</span><br>in 12 Weeks</div>
+      <div class="sub">Step-by-step guide: Moove partnership → B2B corporate subscriptions → consumer app licence. Includes official application links and verified costs.</div>
+    </div>
+    <div class="kpi-strip">
+      <div class="kpi"><div class="kpi-val">~$108K</div><div class="kpi-lbl">Total Startup Capital</div></div>
+      <div class="kpi"><div class="kpi-val">Week 3</div><div class="kpi-lbl">First Revenue</div></div>
+      <div class="kpi"><div class="kpi-val">152 subs</div><div class="kpi-lbl">Breakeven Point</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE TABS -->
+  <div class="phase-nav">
+    <button class="phase-tab p1a active" onclick="showPhase('p1a')">
+      <span class="tab-label">Phase 1A · Weeks 1–8</span>
+      Company + Moove + B2B Revenue
+    </button>
+    <button class="phase-tab p1b" onclick="showPhase('p1b')">
+      <span class="tab-label">Phase 1B · Weeks 4–12</span>
+      App Registration + Consumer Launch
+    </button>
+    <button class="phase-tab p2" onclick="showPhase('p2')">
+      <span class="tab-label">Phase 2 · Month 6–18</span>
+      Fleet Acquisition (Raymond LLC)
+    </button>
+  </div>
+
+  <!-- ════ PHASE 1A ════ -->
+  <div class="phase-content active" id="phase-p1a">
+    <div class="steps">
+
+      <!-- STEP 1 — DMCC -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">1</div>
+          <div class="step-tag">Week 1–2</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Register Free Zone Company — DMCC</div>
+          <div class="step-sub">100% foreign ownership · Fully online · 3–7 working days for e-licence</div>
+
+          <div class="timeline-strip">
+            <div class="tl-cell active-p1a">W1</div><div class="tl-cell active-p1a">W2</div>
+            <div class="tl-cell">W3</div><div class="tl-cell">W4</div><div class="tl-cell">W5</div>
+            <div class="tl-cell">W6</div><div class="tl-cell">W7</div><div class="tl-cell">W8</div>
+          </div>
+
+          <div class="step-grid">
+            <div class="info-block gold">
+              <div class="block-label">Why DMCC</div>
+              <div class="block-content">World's #1 free zone. Best banking approval rates of any Dubai free zone. Prestigious address for B2B corporate clients. 26,000+ member companies.</div>
+            </div>
+            <div class="info-block navy">
+              <div class="block-label">Activity Codes to Register</div>
+              <div class="block-content">
+                <strong>Technology Platform Services</strong><br>
+                Transportation Brokerage / Aggregation<br>
+                Management Consultancy (for B2B contracts)<br>
+                Software Development &amp; IT Services
+              </div>
+            </div>
+          </div>
+
+          <table class="data-table" style="margin-top:14px;">
+            <tr><th>Fee Item</th><th>Amount (AED)</th><th>Notes</th></tr>
+            <tr><td>Initial application fee</td><td class="td-mono td-gold">1,035</td><td>Paid online at submission</td></tr>
+            <tr><td>Trade licence (service)</td><td class="td-mono td-gold">15,000–18,000/yr</td><td>Technology platform activities</td></tr>
+            <tr><td>Flexi-desk (address)</td><td class="td-mono td-gold">6,500–8,000/yr</td><td>Shared workspace, valid business address</td></tr>
+            <tr><td>Company registration</td><td class="td-mono td-gold">5,000–8,000</td><td>One-time MOA &amp; incorporation</td></tr>
+            <tr><td>Establishment card</td><td class="td-mono td-gold">1,500–2,000</td><td>Required for visa sponsorship</td></tr>
+            <tr><td><strong>TOTAL YEAR 1</strong></td><td class="td-mono td-gold td-bold">AED 29,000–37,000</td><td>All-inclusive DMCC fees</td></tr>
+          </table>
+
+          <div class="alert tip" style="margin-top:14px;">
+            <div class="alert-icon">🔗</div>
+            <div class="alert-text">
+              <strong>Apply:</strong> <a href="https://dmcc.ae/business" target="_blank">dmcc.ae/business</a> &nbsp;·&nbsp;
+              <strong>Member portal:</strong> <a href="https://member.dmcc.ae" target="_blank">member.dmcc.ae</a><br>
+              <strong>Budget alternative (lower cost):</strong> IFZA Free Zone from AED 12,750/yr — <a href="https://ifza.ae" target="_blank">ifza.ae</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 — VISA -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">2</div>
+          <div class="step-tag">Week 1–3</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Founder Visa — Free Zone Investor Route</div>
+          <div class="step-sub">Emirates ID unlocks banking · Do in parallel with company formation · AED 4,500–6,500 per founder</div>
+
+          <div class="timeline-strip">
+            <div class="tl-cell active-p1a">W1</div><div class="tl-cell active-p1a">W2</div>
+            <div class="tl-cell active-p1a">W3</div><div class="tl-cell">W4</div><div class="tl-cell">W5</div>
+            <div class="tl-cell">W6</div><div class="tl-cell">W7</div><div class="tl-cell">W8</div>
+          </div>
+
+          <table class="data-table">
+            <tr><th>Step</th><th>Action</th><th>Where</th><th>Cost</th></tr>
+            <tr><td>2a</td><td>Entry permit via DMCC portal after licence issued</td><td class="td-mono"><a href="https://member.dmcc.ae" target="_blank" style="color:var(--teal)">member.dmcc.ae</a></td><td class="td-mono td-gold">Included</td></tr>
+            <tr><td>2b</td><td>Travel to Dubai: medical fitness test + biometrics</td><td>DMCC-approved health centres</td><td class="td-mono td-gold">AED 700–1,000</td></tr>
+            <tr><td>2c</td><td>Emirates ID issued — carry to all bank meetings</td><td>ICP / GDRFA (automatic)</td><td class="td-mono td-gold">AED 370</td></tr>
+            <tr><td>2d</td><td>Visa stamp in passport</td><td class="td-mono"><a href="https://gdrfa.ae" target="_blank" style="color:var(--teal)">gdrfa.ae</a></td><td class="td-mono td-gold">AED 500–800</td></tr>
+            <tr><td><strong>Total / founder</strong></td><td><strong>Government fees only</strong></td><td>—</td><td class="td-mono td-gold td-bold">AED 4,500–6,500</td></tr>
+          </table>
+
+          <div class="alert warn" style="margin-top:10px;">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-text"><strong>Critical dependency:</strong> Banks require Emirates ID to finalise business account opening. No Emirates ID = no bank account. Start visa application in Week 1, not after the licence arrives. Without this, you cannot receive a single payment.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 — BANKING -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">3</div>
+          <div class="step-tag">Week 1 — Start Now</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Open Business Bank Account — Start Immediately</div>
+          <div class="step-sub">The longest-lead item · Run in parallel with everything else · Budget AED 50–100K minimum balance reserve</div>
+
+          <div class="timeline-strip">
+            <div class="tl-cell active-p1a">W1</div><div class="tl-cell active-p1a">W2</div>
+            <div class="tl-cell active-p1a">W3</div><div class="tl-cell active-p1a">W4</div>
+            <div class="tl-cell">W5</div><div class="tl-cell">W6</div><div class="tl-cell">W7</div><div class="tl-cell">W8</div>
+          </div>
+
+          <table class="data-table">
+            <tr><th>Bank</th><th>Min Balance</th><th>Approval</th><th>Best For</th><th>Apply</th></tr>
+            <tr>
+              <td><strong class="td-green">Wio Bank ★</strong></td>
+              <td class="td-green td-mono">Zero</td>
+              <td>72 hrs – 3 days</td>
+              <td>Startups, digital-first, fastest to open</td>
+              <td class="td-mono"><a href="https://business.wio.io" target="_blank" style="color:var(--teal)">business.wio.io</a></td>
+            </tr>
+            <tr>
+              <td><strong>Mashreq NeoBiz</strong></td>
+              <td class="td-mono">AED 10–50K</td>
+              <td>7–14 days</td>
+              <td>Good credibility, service sector founders</td>
+              <td class="td-mono"><a href="https://www.mashreq.com/en/uae/business" target="_blank" style="color:var(--teal)">mashreq.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>Emirates NBD</strong></td>
+              <td class="td-mono">AED 50–100K</td>
+              <td>14–30 days</td>
+              <td>Max credibility for enterprise B2B clients</td>
+              <td class="td-mono"><a href="https://www.emiratesnbd.com/en/business" target="_blank" style="color:var(--teal)">emiratesnbd.com</a></td>
+            </tr>
+          </table>
+
+          <div class="alert note">
+            <div class="alert-icon">💡</div>
+            <div class="alert-text"><strong>Strategy:</strong> Open Wio Bank immediately (takes 72 hours) as your operational account. Apply for Mashreq or Emirates NBD in parallel for your main corporate account — use Wio while the traditional bank processes. Documents needed: trade licence, MOA, passports + Emirates ID, business plan, source of funds letter.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 — VAT -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">4</div>
+          <div class="step-tag">Before Invoice 1</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">VAT Registration — Federal Tax Authority</div>
+          <div class="step-sub">Mandatory before first subscriber invoice · Free to register · 5% on all subscription fees</div>
+
+          <div class="step-grid">
+            <div class="info-block red">
+              <div class="block-label">Threshold</div>
+              <div class="block-content">Mandatory: AED 375,000 in taxable supplies in any 12 months.<br>At base case (AED 108K/mo commission) you hit this in <strong>Month 1.</strong><br>Late registration penalty: AED 20,000 — do not delay.</div>
+            </div>
+            <div class="info-block teal">
+              <div class="block-label">VAT on Your Model</div>
+              <div class="block-content">
+                Subscriber pays: AED 1,260 (AED 1,200 + 5% VAT)<br>
+                Your commission: 30% × AED 1,200 = AED 360 net<br>
+                Moove invoices you: AED 840 + VAT → you recover<br>
+                File quarterly via EmaraTax portal
+              </div>
+            </div>
+          </div>
+
+          <div class="alert tip" style="margin-top:12px;">
+            <div class="alert-icon">🔗</div>
+            <div class="alert-text">
+              <strong>Register:</strong> <a href="https://eservices.tax.gov.ae" target="_blank">eservices.tax.gov.ae</a> (EmaraTax — create account first)<br>
+              <strong>VAT guide:</strong> <a href="https://tax.gov.ae/en/services/vat.registration.aspx" target="_blank">tax.gov.ae/en/services/vat.registration.aspx</a><br>
+              <strong>Cost:</strong> Free to register. UAE accountant for quarterly returns: ~AED 2,000–3,000/year.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 — MOOVE -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">5</div>
+          <div class="step-tag">Week 1–3</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Negotiate Moove Partnership Agreement</div>
+          <div class="step-sub">30% commission · 500-car EV fleet · Zero CAPEX · Contact CEO via existing relationship</div>
+
+          <div class="step-grid three">
+            <div class="info-block gold">
+              <div class="block-label">Win ① — SLA</div>
+              <div class="block-content">Dedicated pool of 50–100 vehicles. Max 8-min wait 7am–9pm. Financial penalty if &gt;5% of bookings breach SLA in any month.</div>
+            </div>
+            <div class="info-block gold">
+              <div class="block-label">Win ② — Price Lock</div>
+              <div class="block-content">12-month lock on 70/30 split from signing. Annual escalation capped at UAE CPI (~2–3%). 90-day notice for any material change.</div>
+            </div>
+            <div class="info-block gold">
+              <div class="block-label">Win ③ — Fleet Quality</div>
+              <div class="block-content">Dedicated driver pool, min 12 months UAE Moove tenure. Vehicles max 3 years old. Right to remove driver/vehicle with 48h notice.</div>
+            </div>
+          </div>
+
+          <div class="info-block amber" style="margin-top:12px;">
+            <div class="block-label">Fallback Partners — Contact Before the Moove Meeting</div>
+            <div class="block-content">
+              Having alternatives changes the commercial dynamic. Contact Yango GCC first — they are already an active partner of Raymond LLC (confirmed in bank statement).<br><br>
+              <strong>Yango UAE B2B:</strong> <a href="https://b2b.yango.com" target="_blank">b2b.yango.com</a> &nbsp;·&nbsp;
+              <strong>Bolt UAE:</strong> <a href="https://partners.bolt.eu" target="_blank">partners.bolt.eu</a>
+            </div>
+          </div>
+
+          <div class="alert ok" style="margin-top:10px;">
+            <div class="alert-icon">✓</div>
+            <div class="alert-text"><strong>Revenue starts here.</strong> Once LOI is signed with Moove (even non-binding), begin B2B corporate sales immediately using the manual model — no app, no RTA licence needed. One corporate client = 10–50 subscribers.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6 — OFFICE -->
+      <div class="step-card p1a">
+        <div class="step-num-col">
+          <div class="step-num">6</div>
+          <div class="step-tag">Week 2–3</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Secure Office Space — Business Bay</div>
+          <div class="step-sub">Central location · DIFC/Downtown proximity · No long-term lease commitment · AED 6,000–12,000/month</div>
+
+          <div class="step-grid three">
+            <div class="info-block teal">
+              <div class="block-label">Regus Business Bay ★</div>
+              <div class="block-content">AED 6,000–10,000/mo. Private serviced office. Meeting rooms included. Flexible month-to-month.<br><br><a href="https://www.regus.ae/en-gb/united-arab-emirates/dubai/business-bay" target="_blank">regus.ae → Business Bay</a></div>
+            </div>
+            <div class="info-block navy">
+              <div class="block-label">IWG / Spaces Dubai</div>
+              <div class="block-content">AED 5,500–9,000/mo. Co-working + dedicated desks. Strong corporate perception.<br><br><a href="https://www.iwgplc.com/en-gb/locations/uae/dubai" target="_blank">iwgplc.com → Dubai</a></div>
+            </div>
+            <div class="info-block">
+              <div class="block-label">DMCC Flexi-Desk</div>
+              <div class="block-content">AED 542/mo (AED 6,500/yr). Included in DMCC licence package. Shared workspace at JLT. Good for registered address if B2B meetings are held at client offices.<br><br><a href="https://dmcc.ae/business" target="_blank">dmcc.ae</a></div>
+            </div>
+          </div>
+
+          <div class="cost-badge">Total Phase 1A Cost: AED 87,000–115,000 (Steps 1–6, including visa + bank reserve)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PHASE 1B ════ -->
+  <div class="phase-content" id="phase-p1b">
+    <div class="steps">
+
+      <!-- STEP 7 — RTA NOC -->
+      <div class="step-card p1b">
+        <div class="step-num-col">
+          <div class="step-num">7</div>
+          <div class="step-tag">Week 2–6</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">RTA Preliminary NOC — Transport Platform Activity</div>
+          <div class="step-sub">The critical regulatory gate for the consumer app · B2B manual model (Step 5) does not need this · Start in Week 2</div>
+
+          <div class="timeline-strip">
+            <div class="tl-cell">W1</div><div class="tl-cell active-p1b">W2</div>
+            <div class="tl-cell active-p1b">W3</div><div class="tl-cell active-p1b">W4</div>
+            <div class="tl-cell active-p1b">W5</div><div class="tl-cell active-p1b">W6</div>
+            <div class="tl-cell">W7</div><div class="tl-cell">W8</div>
+          </div>
+
+          <table class="data-table">
+            <tr><th>Stage</th><th>Action</th><th>Timeline</th><th>Cost</th></tr>
+            <tr><td><strong>7a</strong></td><td>Register company on RTA portal using your trade licence → create company RTA account</td><td>1–2 days</td><td class="td-mono td-green">Free</td></tr>
+            <tr><td><strong>7b</strong></td><td>Submit NOC application: business model, platform architecture, data security framework, AML policy</td><td>3–15 business days</td><td class="td-mono td-gold">AED 1,000–5,000</td></tr>
+            <tr><td><strong>7c</strong></td><td>Fleet validation: provide Moove partnership agreement — their fleet is already RTA-licensed (no new vehicle registration)</td><td>Concurrent with 7b</td><td class="td-mono td-green">Nil</td></tr>
+            <tr><td><strong>7d</strong></td><td>Traffic File &amp; Activity Permit issued after NOC approved</td><td>5–7 days post-NOC</td><td class="td-mono td-gold">AED 500–1,500</td></tr>
+            <tr><td><strong>7e</strong></td><td>Smart App Agreement: for 'Management of Transport Orders through Online Platforms' — sign electronically via SMS link</td><td>1–2 days</td><td class="td-mono td-green">Included</td></tr>
+          </table>
+
+          <div class="alert tip" style="margin-top:12px;">
+            <div class="alert-icon">🔗</div>
+            <div class="alert-text">
+              <strong>Corporate services portal:</strong> <a href="https://www.rta.ae/wps/portal/rta/ae/corporate-services" target="_blank">rta.ae/corporate-services</a><br>
+              <strong>NOC application (serviceId=496):</strong> <a href="https://www.rta.ae/wps/portal/rta/ae/home/rta-services/service-details?serviceId=496" target="_blank">rta.ae → service 496</a><br>
+              <strong>NOC portal login:</strong> <a href="https://noc.rta.ae" target="_blank">noc.rta.ae</a> (company account + UAE Pass)<br>
+              <strong>Support:</strong> <a href="mailto:ask@rta.ae">ask@rta.ae</a> · WhatsApp Mahboub: 0588009090
+            </div>
+          </div>
+
+          <div class="alert ok" style="margin-top:8px;">
+            <div class="alert-icon">✓</div>
+            <div class="alert-text"><strong>Moove shortcut:</strong> Because Moove's 500-car fleet is already RTA-compliant, you only need to register the <em>booking layer</em>, not the vehicles themselves. This saves 3–4 months and ~AED 50,000 vs. registering your own fleet.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 8 — APP DEV -->
+      <div class="step-card p1b">
+        <div class="step-num-col">
+          <div class="step-num">8</div>
+          <div class="step-tag">Week 3–9</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">App Development — RTA-Compliant MVP</div>
+          <div class="step-sub">AED 40,000–70,000 · 4–6 weeks build · All RTA requirements must be in the brief from Day 1</div>
+
+          <div class="timeline-strip">
+            <div class="tl-cell">W1</div><div class="tl-cell">W2</div>
+            <div class="tl-cell active-p1b">W3</div><div class="tl-cell active-p1b">W4</div>
+            <div class="tl-cell active-p1b">W5</div><div class="tl-cell active-p1b">W6</div>
+            <div class="tl-cell active-p1b">W7</div><div class="tl-cell active-p1b">W8</div>
+          </div>
+
+          <div class="step-grid">
+            <div>
+              <div class="block-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">RTA Mandatory Features</div>
+              <ul class="checklist">
+                <li><strong>UAE Pass integration</strong> — government digital ID login. API: <a href="https://www.uaepass.ae/solutions" target="_blank">uaepass.ae/solutions</a></li>
+                <li><strong>Driver verification</strong> — licence + RTA permit check before each trip (Moove data feed)</li>
+                <li><strong>Real-time trip reporting</strong> — data to RTA Road Management System (RTA API)</li>
+                <li><strong>SOS / emergency button</strong> — GPS location sharing, one-tap alert</li>
+                <li><strong>Fare transparency</strong> — show credit usage before confirming booking</li>
+                <li><strong>PDPL consent flows</strong> — explicit GPS tracking opt-in, cannot be pre-ticked</li>
+              </ul>
+            </div>
+            <div>
+              <div class="block-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Development Options</div>
+              <div class="info-block teal">
+                <div class="block-content">
+                  <strong>White-label SDK route (fastest):</strong> Build on top of an existing mobility SDK (Taxiapp, Onde, or similar). Reduces dev time to 3–4 weeks. AED 25,000–45,000.<br><br>
+                  <strong>Custom build:</strong> Full native iOS + Android. 6–10 weeks. AED 60,000–100,000. More control, harder to maintain.
+                </div>
+              </div>
+              <div class="info-block amber" style="margin-top:10px;">
+                <div class="block-label">Payment Gateway</div>
+                <div class="block-content">
+                  <strong>Stripe UAE</strong> (fastest integration): <a href="https://stripe.com/ae" target="_blank">stripe.com/ae</a> — Free setup, 2.9% per transaction<br>
+                  <strong>PayTabs</strong> (UAE-native): <a href="https://www.paytabs.com" target="_blank">paytabs.com</a> — AED 500–1,500 setup, 2.0–2.85%<br>
+                  <strong>Network International:</strong> <a href="https://www.network.ae" target="_blank">network.ae</a> — AED 2,000–5,000 setup
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 9 — DATA PRIVACY -->
+      <div class="step-card p1b">
+        <div class="step-num-col">
+          <div class="step-num">9</div>
+          <div class="step-tag">Week 4–7</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Data Privacy — UAE PDPL Compliance</div>
+          <div class="step-sub">UAE Federal Decree-Law No. 45 of 2021 · Penalties up to AED 5M · Must be live before first user registration</div>
+
+          <div class="step-grid">
+            <div class="info-block red">
+              <div class="block-label">What Your App Collects (All Covered by PDPL)</div>
+              <div class="block-content">Full name &amp; Emirates ID · Phone number · Payment card data · GPS location (every trip) · Trip history · Device identifiers</div>
+            </div>
+            <div class="info-block teal">
+              <div class="block-label">What You Must Have Before Launch</div>
+              <div class="block-content">
+                ✓ Data Protection Officer (COO, Phase 1)<br>
+                ✓ Privacy Policy published on app + website<br>
+                ✓ Explicit GPS tracking opt-in consent flow<br>
+                ✓ UAE-based cloud storage OR documented adequacy assessment<br>
+                ✓ Data retention policy defined
+              </div>
+            </div>
+          </div>
+
+          <div class="alert tip" style="margin-top:10px;">
+            <div class="alert-icon">🔗</div>
+            <div class="alert-text">
+              <strong>PDPL guidance:</strong> <a href="https://www.mohap.gov.ae/en/opendata/personalDataProtection" target="_blank">mohap.gov.ae → Personal Data Protection</a><br>
+              <strong>Cost:</strong> UAE corporate lawyer to draft all documents: AED 5,000–8,000. Timeline: 2–3 weeks. Engage at same time as app development begins.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 10 — INSURANCE -->
+      <div class="step-card p1b">
+        <div class="step-num-col">
+          <div class="step-num">10</div>
+          <div class="step-tag">Before Sub #1</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Platform Liability Insurance</div>
+          <div class="step-sub">Required before first subscriber · When an incident occurs in a Moove car, the subscriber's contract is with you · AED 5,000–8,000/year</div>
+
+          <table class="data-table">
+            <tr><th>Policy</th><th>What It Covers</th><th>Cost</th><th>Provider</th></tr>
+            <tr>
+              <td><strong>Platform Intermediary Liability</strong></td>
+              <td>Claims arising from your role as commercial booking intermediary</td>
+              <td class="td-mono td-gold">AED 3,000–6,000/yr</td>
+              <td><a href="https://www.axa.ae/en/business/liability-insurance" target="_blank" style="color:var(--teal)">axa.ae</a></td>
+            </tr>
+            <tr>
+              <td><strong>Professional Indemnity</strong></td>
+              <td>Service failures, data breaches, contractual disputes with subscribers</td>
+              <td class="td-mono td-gold">AED 2,000–4,000/yr</td>
+              <td><a href="https://www.zurich.ae/en/business/liability" target="_blank" style="color:var(--teal)">zurich.ae</a></td>
+            </tr>
+            <tr>
+              <td><strong>Moove contract clause</strong></td>
+              <td>Confirm in writing that Moove's fleet insurance covers all trips booked via your platform</td>
+              <td class="td-mono td-green">No cost — negotiate</td>
+              <td>Include in partnership agreement</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- STEP 11 — MAINLAND PERMIT -->
+      <div class="step-card p1b">
+        <div class="step-num-col">
+          <div class="step-num">11</div>
+          <div class="step-tag">Month 2</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">DET Mainland Operating Permit</div>
+          <div class="step-sub">Required to invoice mainland UAE companies · Start Month 1 with DIFC-only clients (free zone to free zone — no permit) · Apply Month 2</div>
+
+          <div class="step-grid">
+            <div class="info-block amber">
+              <div class="block-label">Why It's Needed</div>
+              <div class="block-content">Executive Council Resolution No. 11 of 2025 requires free zone companies to hold a DET permit to conduct commercial activities with mainland UAE entities. Most hospitals, law firms, and embassies outside DIFC are mainland entities.</div>
+            </div>
+            <div class="info-block teal">
+              <div class="block-label">Month 1 Strategy — No Permit Needed</div>
+              <div class="block-content">Focus your first B2B clients exclusively on DIFC-registered companies (free zone to free zone = unrestricted). DIFC hosts 600+ financial firms, law firms, and multinational offices. No permit needed for any of them.</div>
+            </div>
+          </div>
+
+          <div class="alert tip" style="margin-top:10px;">
+            <div class="alert-icon">🔗</div>
+            <div class="alert-text">
+              <strong>Apply for DET mainland branch (Month 2):</strong> <a href="https://www.invest.dubai.gov.ae" target="_blank">invest.dubai.gov.ae</a><br>
+              <strong>Cost:</strong> AED 10,000–15,000 · Timeline: 3–4 weeks after company formation is complete
+            </div>
+          </div>
+
+          <div class="cost-badge teal">Total Phase 1B Cost: AED 75,000–110,000 (Steps 7–11 — app, NOC, legal, insurance, permit)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PHASE 2 ════ -->
+  <div class="phase-content" id="phase-p2">
+    <div class="steps">
+
+      <!-- TRIGGER CONDITIONS -->
+      <div class="step-card p2">
+        <div class="step-num-col">
+          <div class="step-num">✓</div>
+          <div class="step-tag">Triggers</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Phase 2 Trigger Conditions — All Must Be Met</div>
+          <div class="step-sub">Do not activate Phase 2 until all of these are confirmed · Raymond can be paused, not abandoned</div>
+
+          <table class="data-table">
+            <tr><th>Condition</th><th>Target</th><th>Status</th><th>Priority</th></tr>
+            <tr>
+              <td><strong>Platform has 200+ subscribers</strong></td>
+              <td>Phase 1B deliverable</td>
+              <td>On track via B2B sales</td>
+              <td class="td-teal td-bold">Phase 1 target</td>
+            </tr>
+            <tr>
+              <td><strong>Conflict/Hormuz risk abates</strong></td>
+              <td>Normalised regional environment</td>
+              <td>Monitor monthly</td>
+              <td class="td-amber">Monitor</td>
+            </tr>
+            <tr>
+              <td><strong>Raymond debt confirmed &lt; AED 1.5M</strong></td>
+              <td>Full loan statement from lender</td>
+              <td class="td-red">⚠ Unresolved — raise today</td>
+              <td class="td-red td-bold">Critical CP</td>
+            </tr>
+            <tr>
+              <td><strong>IVMS compliance confirmed — all 29 plates</strong></td>
+              <td>RTA subscription active or install underway</td>
+              <td class="td-red">⚠ Not found in bank statement</td>
+              <td class="td-red td-bold">Critical CP</td>
+            </tr>
+            <tr>
+              <td><strong>Zero RTA fines / Salik arrears on all plates</strong></td>
+              <td>DubaiNow fleet account = zero balance</td>
+              <td class="td-amber">Ask André today — live DubaiNow check</td>
+              <td class="td-amber">High</td>
+            </tr>
+            <tr>
+              <td><strong>RTA platform registration complete</strong></td>
+              <td>Phase 1B deliverable</td>
+              <td>Weeks 8–12 from formation</td>
+              <td class="td-teal">Phase 1B</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- RESERVATION NOW -->
+      <div class="step-card p2">
+        <div class="step-num-col">
+          <div class="step-num">R</div>
+          <div class="step-tag">Do Today</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Raymond Reservation — Do in Today's Meeting</div>
+          <div class="step-sub">Pause the acquisition · Lock Phase 2 optionality at today's distressed valuation · Minimal cost</div>
+
+          <div class="step-grid">
+            <div class="info-block gold">
+              <div class="block-label">What to Negotiate Today</div>
+              <ul class="checklist">
+                <li>Right of first refusal at AED 1.18M total EV (51% = AED 601K) for 12 months</li>
+                <li>Reservation fee: AED 20,000–30,000 — non-refundable, creditable against purchase price</li>
+                <li>André agrees to maintain operational status of all 29 plates during exclusivity period</li>
+                <li>Commit to due diligence list: debt statement, DubaiNow clean, IVMS name</li>
+              </ul>
+            </div>
+            <div class="info-block green">
+              <div class="block-label">Why Phase 1 Makes Phase 2 Stronger</div>
+              <ul class="checklist">
+                <li>RTA registration already in place — no re-application</li>
+                <li>Platform MRR funds acquisition — no new investors</li>
+                <li>Subscriber base = instant DAI model market</li>
+                <li>Moove relationship = fleet operator network built</li>
+                <li>Raymond's valuation stays distressed for 12 months</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACQUISITION STEPS -->
+      <div class="step-card p2">
+        <div class="step-num-col">
+          <div class="step-num">A</div>
+          <div class="step-tag">Month 6–12</div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Acquisition — When Triggered</div>
+          <div class="step-sub">51% stake · AED 1.18M EV (base) · 70% M1 + 30% M6 conditional payment</div>
+
+          <table class="data-table">
+            <tr><th>Step</th><th>Action</th><th>Condition</th><th>Cost</th></tr>
+            <tr><td>A1</td><td>Confirm debt balance with lender — hard condition precedent</td><td>Loan statement from ADCB</td><td class="td-mono">—</td></tr>
+            <tr><td>A2</td><td>Finalise SHA (Shareholders' Agreement) with all 4 shareholders</td><td>André, Lara, Osama, Buti all signed</td><td class="td-mono td-gold">AED 15–25K legal</td></tr>
+            <tr><td>A3</td><td>MOA amendment at DET — reflect new 51% shareholding</td><td>Post-SHA</td><td class="td-mono td-gold">AED 3–5K</td></tr>
+            <tr><td>A4</td><td>Transfer platform admin: Uber Fleet, Yango, Bolt, Careem — Day 1 handover</td><td>Hard condition — non-negotiable</td><td class="td-mono td-green">No cost</td></tr>
+            <tr><td>A5</td><td>IVMS install on all 29 cars (Technologica Dubai) + RTA RMS feed confirmed</td><td>Before close or within 30 days</td><td class="td-mono td-gold">AED 42,500 one-time</td></tr>
+            <tr><td>A6</td><td>Tranche 1 payment: AED 421K (70% of AED 601K)</td><td>SHA signed, MOA amended</td><td class="td-mono td-bold">AED 421,000</td></tr>
+            <tr><td>A7</td><td>RTA licence renewal (hard deadline: 5 Sept 2026)</td><td>Pre-paid or deducted from Tranche 2</td><td class="td-mono td-gold">AED 25,775</td></tr>
+            <tr><td>A8</td><td>Tranche 2 payment: AED 180K (30% of AED 601K)</td><td>Debt verified, DubaiNow clean, IVMS confirmed</td><td class="td-mono td-bold">AED 180,000</td></tr>
+          </table>
+
+          <div class="step-grid" style="margin-top:14px;">
+            <div class="info-block green">
+              <div class="block-label">Phase 2 Financial Model</div>
+              <div class="block-content">
+                <strong>Existing fleet revenue:</strong> AED 3.24M/year (2025 actuals)<br>
+                <strong>DAI platform fee:</strong> AED 2,500/car/month — near 100% margin<br>
+                <strong>Year 1 NIAT (combined):</strong> $136K → <strong>Year 2: $456K</strong><br>
+                <strong>Licence renewal deadline:</strong> <span style="color:var(--red);">5 September 2026</span>
+              </div>
+            </div>
+            <div class="info-block navy">
+              <div class="block-label">DAI Fleet Target</div>
+              <div class="block-content">
+                M1: 30 cars (existing Raymond fleet)<br>
+                M6: 67 cars (first DAI cohort)<br>
+                M12: 217 cars<br>
+                <strong>Platform subscription base becomes DAI marketing channel</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── REVISED CAPITAL SUMMARY ── -->
+  <div class="summary-bar">
+    <div class="sum-block">
+      <h4>Phase 1A Capital (Steps 1–6)</h4>
+      <ul>
+        <li>DMCC company formation: <strong>AED 29–37K</strong></li>
+        <li>Founder visas (×2): <strong>AED 9–13K</strong></li>
+        <li>Bank min balance reserve: <strong>AED 50–100K</strong></li>
+        <li>VAT registration: <strong>Free + AED 3K acct</strong></li>
+        <li>Office (3 months): <strong>AED 18–36K</strong></li>
+        <li><strong>Subtotal: AED 109–189K</strong></li>
+      </ul>
+    </div>
+    <div class="sum-block">
+      <h4>Phase 1B Capital (Steps 7–11)</h4>
+      <ul>
+        <li>RTA NOC + fees: <strong>AED 2–7K</strong></li>
+        <li>App development (MVP): <strong>AED 40–70K</strong></li>
+        <li>Payment gateway: <strong>AED 500–5K</strong></li>
+        <li>PDPL legal docs: <strong>AED 5–8K</strong></li>
+        <li>Platform insurance: <strong>AED 5–8K/yr</strong></li>
+        <li>DET mainland permit: <strong>AED 10–15K</strong></li>
+        <li><strong>Subtotal: AED 63–113K</strong></li>
+      </ul>
+    </div>
+    <div class="sum-block">
+      <h4>Revised Total &amp; Revenue</h4>
+      <ul>
+        <li>Original plan estimate: <strong>AED 270,500</strong></li>
+        <li>Gaps identified: <strong>+AED 125,000</strong></li>
+        <li><strong>Revised total: AED 395,500 (~$108K)</strong></li>
+        <li>Revenue starts: <strong>Week 3–5</strong></li>
+        <li>Breakeven: <strong>152 subscribers</strong></li>
+        <li>Year 1 net (base): <strong>AED 588,000</strong></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showPhase(id) {
+  document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.phase-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  document.querySelectorAll('.phase-tab.' + id).forEach(el => el.classList.add('active'));
+}
+</script>
+
+</body>
+</html>
